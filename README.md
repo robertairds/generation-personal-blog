@@ -1,4 +1,4 @@
-# 📝 Blog Pessoal
+# 📝 Personal Blog
 
 > **Project Status:** 🛠️ In Development (Work in Progress)
 
