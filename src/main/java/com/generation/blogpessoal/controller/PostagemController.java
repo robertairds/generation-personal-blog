@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.blogpessoal.model.Postagem;
 import com.generation.blogpessoal.repository.PostagemRepository;
+import com.generation.blogpessoal.repository.TemaRepository;
 
 import jakarta.validation.Valid;
 
@@ -32,6 +33,9 @@ public class PostagemController {
 
     @Autowired // conecta o robô (postagemRepository) na mesa do recepcionista. 
     private PostagemRepository postagemRepository;
+    
+    @Autowired
+    private TemaRepository temaRepository;
     
     @GetMapping // o cliente diz "Quero ver a lista"
     public ResponseEntity<List<Postagem>> getAll(){ //  
@@ -53,18 +57,28 @@ public class PostagemController {
     @PostMapping // comando para cadastrar
     public ResponseEntity<Postagem> post (@Valid @RequestBody Postagem postagem){ // o cliente entrega uma ficha preenchida com os dados o X novo
     	
-    	postagem.setId(null); // zera o número para o banco de dados dar um número novo automático (ex: se o último era 10, esse vira o 11)
+    	if (temaRepository.existsById(postagem.getTema(). getId())) {
+    		
+    		postagem.setId(null);
+    		
+    		return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
+    	}
     	
-    	return ResponseEntity.status(HttpStatus.CREATED) // devolve o X cadastrado com o carimbo "Criado com sucesso (201 Created)"
-    			.body(postagemRepository.save(postagem));
+    	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
     }
     
     @PutMapping // comando para modificar
     public ResponseEntity<Postagem> put (@Valid @RequestBody Postagem postagem){
-    	return postagemRepository.findById(postagem.getId()) // o atendente checa: "Esse X que você quer atualizar já existe no nosso catálogo?"
-    			.map(resposta -> ResponseEntity.status(HttpStatus.OK) // se existir, o robô joga as informações antigas fora, grava as novas por cima e manda um selo "OK"
-    			      .body(postagemRepository.save(postagem)))
-    			.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build()); // se tentarem atulizar um X que nunca existiu, ele mando o erro 404 (não encontrado)
+    	if (postagemRepository.existsById(postagem.getId())) {
+    		
+    		if (temaRepository.existsById(postagem.getTema().getId()))
+    			return ResponseEntity.status(HttpStatus.OK)
+    					.body(postagemRepository.save(postagem));
+    		
+    		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema não existe!", null);
+    	}
+    	
+    	return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)
