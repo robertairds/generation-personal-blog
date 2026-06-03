@@ -9,7 +9,7 @@ O **Blog Pessoal** é uma API RESTful robusta e escalável desenvolvida no ecoss
 ## 🛠️ Tecnologias e Ferramentas Utilizadas
 
 ### **Ambiente de Desenvolvimento & IDE**
-* ![STS](https://img.shields.io/badge/Spring_Tool_Suite_4-6DB33F?style=for-the-badge&logo=spring&logoColor=white) (**STS / Eclipse** - IDE Principal de Desenvolvimento)
+* ![STS](https://img.shields.io/badge/Spring_Tool_Suite_4-6DB33F?style=for-the-badge&logo=spring&logoColor=white) (**STS** - IDE Principal de Desenvolvimento)
 
 ### **Back-end & Linguagem**
 * ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) (Versão 21)
