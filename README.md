@@ -2,7 +2,7 @@
 
 > **Status do Projeto:** 🚀 Concluido & Publicado na Nuvem
 
-O **Blog Pessoal** é uma API RESTful robusta e escalável desenvolvida no ecossistema **Java** e **Spring Boot**. A aplicação gere uma plataforma de blog estruturada, integrando relacionamentos complexos entre entidades, validações rigorosas de dados, testes automatizados e controle de acesso seguro utilizando autenticação via tokens criptográficos JWT.
+O **Blog Pessoal** é uma API REST robusta e escalável desenvolvida no ecossistema **Java** e **Spring Boot**. A aplicação gere uma plataforma de blog estruturada, integrando relacionamentos complexos entre entidades, validações rigorosas de dados, testes automatizados e controle de acesso seguro utilizando autenticação via tokens criptográficos JWT.
 
 ---
 
